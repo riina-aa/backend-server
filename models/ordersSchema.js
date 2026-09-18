@@ -1,21 +1,68 @@
 const mongoose = require("mongoose"); 
 
-//Schema för användarkonton
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String, 
-        required: [true, "You need to add a username"], 
-        unique: true
+//Schema för beställningar
+const orderSchema = new mongoose.Schema({
+    customer: {
+        name: {
+            type: String,
+            required: [true, "You need to add a name"]
+        }, 
+        email: {
+            type: String, 
+            required: [true, "You need to add an email"],
+            match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Insert a valid email-adress"]
+        },
+        phone: {
+            type: String, 
+            required: [true, "You need to add a telephone number"]
+        }
     }, 
 
-    password: {
+    product: {
+        productType: {
+            type: String, 
+            required: [true, "You need to add a product"]
+        }, 
+
+        servings: {
+            type: Number, 
+            required: [true, "You need to specify the amount of servings"]
+        }, 
+
+        message: {
+            type: String, 
+            required: false
+        }
+    
+    }, 
+
+    deliveryDate: {
+        type: Date, 
+        required: [true, "You need to add a delivery date"]
+    },   
+
+    comment: {
         type: String, 
-        required: [true, "You need to add a password"]
+        required: false
+    },
+
+    status: {
+        type: String, 
+        enum: [
+            "new order", 
+            "confirmed",
+            "inProgress", 
+            "ready", 
+            "completed",
+            "cancelled"
+        ], 
+        default: "new"
     }
+
 }, {
     timestamps: true
 }); 
 
-const Users = mongoose.model("user", userSchema); 
+const Orders = mongoose.model("Order", orderSchema); 
 
-model.exports = Users; 
+model.exports = Orders; 
