@@ -16,7 +16,14 @@ const messageSchema = new mongoose.Schema({
     senderName: {
         type: String, 
         required: [true, "You need to add a name"]
-    } 
+    }, 
+    
+    status: {
+        type: String, 
+        enum: ["new", "read", "handled"], 
+        default: "new"
+    }
+    
 }, {
     timestamps: true
 }); 
