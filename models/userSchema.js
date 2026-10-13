@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"); 
+const bcrypt = require("bcrypt"); 
 
 //Schema för användarkonton
 const userSchema = new mongoose.Schema({
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
 }); 
 
 //Hasha lösenordet innan sparning
-userSchema.pre("save", async () => {
+userSchema.pre("save", async function () {
 
     try {
         
@@ -32,7 +33,7 @@ userSchema.pre("save", async () => {
 }); 
 
 //Registrera användare
-userSchema.statics.register = async (username, password) => {
+userSchema.statics.register = async function(username, password) {
 
     try {
 
@@ -50,7 +51,7 @@ userSchema.methods.comparePassword = async function(password) {
 
     try {
         
-        return await b.crypt.compare(password, this.password); 
+        return await bcrypt.compare(password, this.password); 
 
     } catch (error) {
         throw error; 
@@ -58,7 +59,7 @@ userSchema.methods.comparePassword = async function(password) {
 }; 
 
 //Logga in användare 
-userSchema.statics.login = async (username, password) => {
+userSchema.statics.login = async function(username, password) {
 
     try {
         

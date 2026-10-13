@@ -1,5 +1,5 @@
 const express = require("express");
-const jwt = required("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const Users = require("../models/userSchema");
 const authenticateToken = require("../middleware/authenticateToken");
@@ -17,7 +17,7 @@ router.get("/users", authenticateToken, async (req, res) => {
 
 });
 
-router.post("/register", authenticateToken, async (req, res) => {
+router.post("/register", async (req, res) => {
 
     try {
 
@@ -35,7 +35,7 @@ router.post("/register", authenticateToken, async (req, res) => {
         res.status(200).json({ message: "User details are created" });
 
     } catch (error) {
-        res.json({ message: "Username is taken. Please try again with a different username" });
+        res.json({ message: "Fel:" + error });
     }
 
 });
@@ -73,7 +73,9 @@ router.post("/login", async (req, res) => {
         }
 
     } catch (error) {
-        throw error; 
+        console.log("Fel: " + error)
+
+        return res.status(500).json({ message: "Ett fel uppstod"});
     }
 
 }); 
@@ -89,3 +91,5 @@ router.delete("/users/:id", authenticateToken, async (req, res) => {
     }
 
 });
+
+module.exports = router;

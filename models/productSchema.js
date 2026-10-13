@@ -23,8 +23,8 @@ const productSchema = new mongoose.Schema({
             "brunch", 
             "bakery", 
             "sourdough",
-            "hot-drinks",
-            "cold-drinks",
+            "hotDrinks",
+            "coldDrinks",
             "cocktails"
         ]
     }, 
