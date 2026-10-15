@@ -20,11 +20,11 @@ router.post("/orders", async (req, res) => {
 
     try {
 
-        let result = await Orders.create(req.body);
+        await Orders.create(req.body);
         return res.status(201).json({ message: "The order has been recieved" });
 
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({ message: "The order was not recieved"});
     }
 
 });

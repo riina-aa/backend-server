@@ -43,13 +43,14 @@ const orderSchema = new mongoose.Schema({
 
     comment: {
         type: String, 
+        default: "",
         required: false
     },
 
     status: {
         type: String, 
         enum: [
-            "new order", 
+            "new", 
             "confirmed",
             "inProgress", 
             "ready", 
@@ -57,6 +58,11 @@ const orderSchema = new mongoose.Schema({
             "cancelled"
         ], 
         default: "new"
+    }, 
+
+    staffNotes: {
+        type: String, 
+        default: ""
     }
 
 }, {
