@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
         res.status(200).json({ message: "User details are created" });
 
     } catch (error) {
-        res.json({ message: "Fel:" + error });
+        res.json({ message: "Username is taken. Please try again." });
     }
 
 });
