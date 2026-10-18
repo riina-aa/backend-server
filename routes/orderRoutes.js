@@ -33,17 +33,17 @@ router.put("/orders/:id", authenticateToken, async (req, res) => {
 
     try {
 
-        const { deliveryDate, comment, status } = req.body;
+        const { staffNotes, status } = req.body;
+
         let result = await Orders.updateOne({ _id: req.params.id },
             {
                 $set: {
-                    deliveryDate, 
-                    comment, 
+                    staffNotes, 
                     status
                 }
             }
         )
-        res.status(400).json({ message: "Order has been updated" + result}); 
+        res.status(200).json({ message: "Order has been updated" + result}); 
 
     } catch (error) {
         res.status(500).json({ message: "Update failed due to: " + error}); 

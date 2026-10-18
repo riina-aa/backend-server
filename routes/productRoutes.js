@@ -33,15 +33,13 @@ router.put("/products/:id", authenticateToken, async (req, res) => {
 
     try {
 
-        const { productName, description, price, category, image, available, allergies } = req.body;
+        const { description, price, category, available, allergies } = req.body;
         let result = await Products.updateOne({ _id: req.params.id },
             {
-                $set: {
-                    productName, 
+                $set: { 
                     description, 
                     price, 
                     category, 
-                    image, 
                     available, 
                     allergies
                 }

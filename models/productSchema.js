@@ -29,11 +29,6 @@ const productSchema = new mongoose.Schema({
         ]
     }, 
 
-    image: {
-        type: String, 
-        required: [true, "You need to add an image"]
-    }, 
-
     available: {
         type: Boolean, 
         default: true
